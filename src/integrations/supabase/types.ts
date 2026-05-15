@@ -127,6 +127,36 @@ export type Database = {
           },
         ]
       }
+      friendships: {
+        Row: {
+          created_at: string
+          id: string
+          requested_by: string
+          status: string
+          updated_at: string
+          user_a: string
+          user_b: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          requested_by: string
+          status?: string
+          updated_at?: string
+          user_a: string
+          user_b: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          requested_by?: string
+          status?: string
+          updated_at?: string
+          user_a?: string
+          user_b?: string
+        }
+        Relationships: []
+      }
       player_profiles: {
         Row: {
           accept_threshold: number
@@ -196,6 +226,39 @@ export type Database = {
           truc_strength_n?: number
           truc_strength_sum?: number
           updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          email: string | null
+          friend_code: string
+          updated_at: string
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name: string
+          email?: string | null
+          friend_code: string
+          updated_at?: string
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          email?: string | null
+          friend_code?: string
+          updated_at?: string
+          user_id?: string
+          username?: string | null
         }
         Relationships: []
       }
@@ -471,12 +534,207 @@ export type Database = {
         }
         Relationships: []
       }
+      user_stats: {
+        Row: {
+          abandoned: number
+          current_streak: number
+          level: number
+          losses: number
+          max_streak: number
+          updated_at: string
+          user_id: string
+          wins: number
+          xp: number
+        }
+        Insert: {
+          abandoned?: number
+          current_streak?: number
+          level?: number
+          losses?: number
+          max_streak?: number
+          updated_at?: string
+          user_id: string
+          wins?: number
+          xp?: number
+        }
+        Update: {
+          abandoned?: number
+          current_streak?: number
+          level?: number
+          losses?: number
+          max_streak?: number
+          updated_at?: string
+          user_id?: string
+          wins?: number
+          xp?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      gen_friend_code: { Args: never; Returns: string }
+      get_public_avatars_by_devices: {
+        Args: { p_device_ids: string[] }
+        Returns: {
+          avatar_url: string
+          device_id: string
+          username: string
+        }[]
+      }
+      get_public_friends_by_user_id: {
+        Args: { p_user_id: string }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          level: number
+          max_streak: number
+          user_id: string
+          username: string
+          wins: number
+        }[]
+      }
+      get_public_player_profile_by_device: {
+        Args: { p_device_id: string }
+        Returns: {
+          abandoned: number
+          avatar_url: string
+          current_streak: number
+          display_name: string
+          friend_code: string
+          level: number
+          losses: number
+          max_streak: number
+          user_id: string
+          username: string
+          wins: number
+          xp: number
+        }[]
+      }
+      get_public_player_profile_by_user_id: {
+        Args: { p_user_id: string }
+        Returns: {
+          abandoned: number
+          avatar_url: string
+          current_streak: number
+          display_name: string
+          friend_code: string
+          level: number
+          losses: number
+          max_streak: number
+          user_id: string
+          username: string
+          wins: number
+          xp: number
+        }[]
+      }
+      is_username_available: { Args: { p_username: string }; Returns: boolean }
+      is_username_reserved: { Args: { p_username: string }; Returns: boolean }
+      level_for_xp: { Args: { p_xp: number }; Returns: number }
+      record_match_result: {
+        Args: {
+          p_bot_opponents: number
+          p_human_opponents: number
+          p_won: boolean
+        }
+        Returns: {
+          abandoned: number
+          current_streak: number
+          level: number
+          losses: number
+          max_streak: number
+          updated_at: string
+          user_id: string
+          wins: number
+          xp: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "user_stats"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      remove_friend: { Args: { p_friend_user_id: string }; Returns: undefined }
+      respond_friend_request: {
+        Args: { p_accept: boolean; p_friendship_id: string }
+        Returns: undefined
+      }
+      send_friend_request_by_code: {
+        Args: { p_code: string }
+        Returns: {
+          created_at: string
+          id: string
+          requested_by: string
+          status: string
+          updated_at: string
+          user_a: string
+          user_b: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "friendships"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      send_friend_request_by_email: {
+        Args: { p_email: string }
+        Returns: {
+          created_at: string
+          id: string
+          requested_by: string
+          status: string
+          updated_at: string
+          user_a: string
+          user_b: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "friendships"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      send_friend_request_by_username: {
+        Args: { p_username: string }
+        Returns: {
+          created_at: string
+          id: string
+          requested_by: string
+          status: string
+          updated_at: string
+          user_a: string
+          user_b: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "friendships"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      set_username: {
+        Args: { p_username: string }
+        Returns: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          email: string | null
+          friend_code: string
+          updated_at: string
+          user_id: string
+          username: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "profiles"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       room_status: "lobby" | "playing" | "finished" | "abandoned"
