@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode, type CSSProperties } from "react";
 import { Link } from "@/lib/router-shim";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -25,6 +25,12 @@ function Board({ kind }: { kind: LeaderboardKind }) {
       {entries.map((e) => {
         const label = e.profile.username ?? "Jugador anònim";
         const games = e.stats.wins + e.stats.losses;
+        const kindMeta = {
+          level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as CSSProperties | undefined },
+          games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#5b8a3c" } as CSSProperties },
+          wins: { icon: <Trophy className="w-4 h-4" />, value: e.stats.wins, className: "text-primary", style: undefined },
+          streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
+        }[kind];
         return (
           <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
             <div className="flex items-center min-w-0 flex-1 -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
@@ -50,6 +56,9 @@ function Board({ kind }: { kind: LeaderboardKind }) {
                 </div>
               </div>
             </div>
+            <span className={`inline-flex items-center gap-1 font-bold text-sm shrink-0 ${kindMeta.className}`} style={kindMeta.style}>
+              {kindMeta.icon} {kindMeta.value}
+            </span>
           </Link>
         );
       })}

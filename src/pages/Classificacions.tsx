@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Link, useNavigate } from "@/lib/router-shim";
 import { ClientOnly } from "@/components/ClientOnly";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +29,12 @@ function Board({ kind }: { kind: LeaderboardKind }) {
       ? e.profile.username
       : "Jugador anònim";
     const games = e.stats.wins + e.stats.losses;
+    const kindMeta = {
+      level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as CSSProperties | undefined },
+      games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#93C572" } as CSSProperties },
+      wins: { icon: <Trophy className="w-4 h-4" />, value: e.stats.wins, className: "text-primary", style: undefined },
+      streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
+    }[kind];
         return (
           <Link
             key={e.profile.user_id}
@@ -58,6 +64,9 @@ function Board({ kind }: { kind: LeaderboardKind }) {
                 </div>
               </div>
             </div>
+            <span className={`inline-flex items-center gap-1 font-bold text-sm shrink-0 ${kindMeta.className}`} style={kindMeta.style}>
+              {kindMeta.icon} {kindMeta.value}
+            </span>
           </Link>
         );
       })}
