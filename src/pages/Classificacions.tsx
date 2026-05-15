@@ -4,7 +4,7 @@ import { ClientOnly } from "@/components/ClientOnly";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Loader2, ArrowLeft, Trophy, Star, Flame } from "lucide-react";
+import { Loader2, ArrowLeft, Trophy, Star, Flame, WalletCards, X } from "lucide-react";
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardKind } from "@/lib/leaderboards";
 
 function Loading() {
@@ -22,32 +22,42 @@ function Board({ kind }: { kind: LeaderboardKind }) {
   if (entries.length === 0) {
     return <p className="text-sm text-muted-foreground text-center py-6">Encara no hi ha jugadors classificats.</p>;
   }
-  const valueOf = (e: LeaderboardEntry) =>
-    kind === "wins" ? `${e.stats.wins} V`
-      : kind === "level" ? `Niv. ${e.stats.level}`
-      : `${e.stats.max_streak}🔥`;
   return (
     <div className="space-y-1.5">
       {entries.map((e) => {
     const label = e.profile.username
       ? e.profile.username
       : "Jugador anònim";
+    const games = e.stats.wins + e.stats.losses;
         return (
           <Link
             key={e.profile.user_id}
             to={`/perfil/${e.profile.user_id}`}
-            className="w-full flex items-center justify-between rounded-md border p-2 text-left hover:bg-background/60 transition"
+            className="w-full flex items-center justify-between gap-2 rounded-md border p-2 text-left hover:bg-background/60 transition"
           >
-            <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
               <span className="w-7 text-center font-bold text-muted-foreground">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic text-muted-foreground"}`}>{label}</div>
-                <div className="text-xs text-muted-foreground">
-                  Niv. {e.stats.level} · {e.stats.wins}V/{e.stats.losses}D · ratxa {e.stats.max_streak}
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs font-bold leading-none">
+                  <span className="inline-flex items-center gap-0.5 text-orange-500" title="Nivell">
+                    <Star className="w-3.5 h-3.5" /> {e.stats.level}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5" style={{ color: "#93C572" }} title="Partides">
+                    <WalletCards className="w-3.5 h-3.5" /> {games}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-primary" title="Victòries">
+                    <Trophy className="w-3.5 h-3.5" /> {e.stats.wins}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-destructive" title="Derrotes">
+                    <X className="w-3.5 h-3.5" /> {e.stats.losses}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-orange-500" title="Ratxa màx.">
+                    <Flame className="w-3.5 h-3.5" /> {e.stats.max_streak}
+                  </span>
                 </div>
               </div>
             </div>
-            <div className="text-sm font-semibold tabular-nums">{valueOf(e)}</div>
           </Link>
         );
       })}
