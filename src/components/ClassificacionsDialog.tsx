@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode, type CSSProperties } from "react";
 import { Link } from "@/lib/router-shim";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -26,8 +26,8 @@ function Board({ kind }: { kind: LeaderboardKind }) {
         const label = e.profile.username ?? "Jugador anònim";
         const games = e.stats.wins + e.stats.losses;
         const kindMeta = {
-          level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as React.CSSProperties | undefined },
-          games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#5b8a3c" } as React.CSSProperties },
+          level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as CSSProperties | undefined },
+          games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#5b8a3c" } as CSSProperties },
           wins: { icon: <Trophy className="w-4 h-4" />, value: e.stats.wins, className: "text-primary", style: undefined },
           streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
         }[kind];

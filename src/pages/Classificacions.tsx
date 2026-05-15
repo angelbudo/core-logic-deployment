@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Link, useNavigate } from "@/lib/router-shim";
 import { ClientOnly } from "@/components/ClientOnly";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,8 +30,8 @@ function Board({ kind }: { kind: LeaderboardKind }) {
       : "Jugador anònim";
     const games = e.stats.wins + e.stats.losses;
     const kindMeta = {
-      level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as React.CSSProperties | undefined },
-      games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#93C572" } as React.CSSProperties },
+      level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as CSSProperties | undefined },
+      games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#93C572" } as CSSProperties },
       wins: { icon: <Trophy className="w-4 h-4" />, value: e.stats.wins, className: "text-primary", style: undefined },
       streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
     }[kind];
