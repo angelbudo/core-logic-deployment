@@ -590,6 +590,7 @@ export type Database = {
           avatar_url: string
           display_name: string
           level: number
+          losses: number
           max_streak: number
           user_id: string
           username: string

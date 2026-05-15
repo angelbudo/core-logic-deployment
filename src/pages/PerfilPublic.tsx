@@ -34,6 +34,7 @@ interface PublicFriend {
   avatar_url: string | null;
   level: number;
   wins: number;
+  losses: number;
   max_streak: number;
 }
 
@@ -213,7 +214,13 @@ function PerfilPublicInner() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="font-medium truncate text-foreground">{name}</div>
-                      <div className="text-xs text-muted-foreground">Niv. {friend.level} · {friend.wins}V · ratxa {friend.max_streak}</div>
+                      <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs font-bold leading-none">
+                        <span className="inline-flex items-center gap-0.5 text-orange-500" title="Nivell"><Star className="w-3.5 h-3.5" /> {friend.level}</span>
+                        <span className="inline-flex items-center gap-0.5" style={{ color: "#93C572" }} title="Partides"><WalletCards className="w-3.5 h-3.5" /> {friend.wins + friend.losses}</span>
+                        <span className="inline-flex items-center gap-0.5 text-primary" title="Victòries"><Trophy className="w-3.5 h-3.5" /> {friend.wins}</span>
+                        <span className="inline-flex items-center gap-0.5 text-destructive" title="Derrotes"><X className="w-3.5 h-3.5" /> {friend.losses}</span>
+                        <span className="inline-flex items-center gap-0.5 text-orange-500" title="Ratxa màx."><Flame className="w-3.5 h-3.5" /> {friend.max_streak}</span>
+                      </div>
                     </div>
                   </Link>
                 );
