@@ -1,0 +1,75 @@
+import { useEffect, useState, type ReactNode } from "react";
+import { Link } from "@/lib/router-shim";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2, Trophy, Star, Flame, WalletCards } from "lucide-react";
+import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardKind } from "@/lib/leaderboards";
+
+function Loading() {
+  return <div className="py-10 flex items-center justify-center"><Loader2 className="w-6 h-6 animate-spin text-primary" /></div>;
+}
+
+function Board({ kind }: { kind: LeaderboardKind }) {
+  const [entries, setEntries] = useState<LeaderboardEntry[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    fetchLeaderboard(kind).then((e) => { if (alive) setEntries(e); });
+    return () => { alive = false; };
+  }, [kind]);
+  if (!entries) return <Loading />;
+  if (entries.length === 0) {
+    return <p className="text-sm text-muted-foreground text-center py-6">Encara no hi ha jugadors classificats.</p>;
+  }
+  const valueOf = (e: LeaderboardEntry) =>
+    kind === "wins" ? `${e.stats.wins} V`
+      : kind === "level" ? `Niv. ${e.stats.level}`
+      : kind === "games" ? `${e.stats.wins + e.stats.losses} P`
+      : `${e.stats.max_streak}🔥`;
+  return (
+    <div className="avatar-scroll max-h-[55vh] overflow-y-auto pr-2 space-y-1.5">
+      {entries.map((e) => {
+        const label = e.profile.username ?? "Jugador anònim";
+        return (
+          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center justify-between rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
+              <div className="min-w-0">
+                <div className={`font-medium truncate ${e.profile.username ? "" : "italic"}`}>{label}</div>
+                <div className="text-xs text-neutral-800">
+                  Niv. {e.stats.level} · {e.stats.wins}V/{e.stats.losses}D · ratxa {e.stats.max_streak}
+                </div>
+              </div>
+            </div>
+            <div className="text-sm font-semibold tabular-nums">{valueOf(e)}</div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border-primary/30">
+        <DialogHeader>
+          <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
+        </DialogHeader>
+        <Tabs defaultValue="level">
+          <TabsList className="grid grid-cols-4 w-full">
+            <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent"><Star className="w-4 h-4 mr-1" />Nivell</TabsTrigger>
+            <TabsTrigger value="games" className="data-[state=active]:bg-background" style={{ color: "#93C572" }}><WalletCards className="w-4 h-4 mr-1" />Partides</TabsTrigger>
+            <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary"><Trophy className="w-4 h-4 mr-1" />Victòries</TabsTrigger>
+            <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500"><Flame className="w-4 h-4 mr-1" />Ratxa</TabsTrigger>
+          </TabsList>
+          <TabsContent value="level" className="mt-3"><Board kind="level" /></TabsContent>
+          <TabsContent value="games" className="mt-3"><Board kind="games" /></TabsContent>
+          <TabsContent value="wins" className="mt-3"><Board kind="wins" /></TabsContent>
+          <TabsContent value="streak" className="mt-3"><Board kind="streak" /></TabsContent>
+        </Tabs>
+      </DialogContent>
+    </Dialog>
+  );
+}
