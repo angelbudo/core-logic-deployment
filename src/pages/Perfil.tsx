@@ -205,8 +205,12 @@ function PerfilInner() {
                         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${f.online ? "bg-gold" : "bg-muted-foreground/40"}`} title={f.online ? "Connectat" : "Desconnectat"} />
                         <div className="min-w-0">
                           <div className="font-medium truncate text-foreground">{f.other.username ?? "Jugador anònim"}</div>
-                          <div className="text-xs text-muted-foreground">
-                            Niv. {f.stats?.level ?? 1} · {f.stats?.wins ?? 0}V · ratxa {f.stats?.max_streak ?? 0}
+                          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs font-bold leading-none">
+                            <span className="inline-flex items-center gap-0.5 text-orange-500" title="Nivell"><Star className="w-3.5 h-3.5" /> {f.stats?.level ?? 1}</span>
+                            <span className="inline-flex items-center gap-0.5" style={{ color: "#93C572" }} title="Partides"><WalletCards className="w-3.5 h-3.5" /> {(f.stats?.wins ?? 0) + (f.stats?.losses ?? 0)}</span>
+                            <span className="inline-flex items-center gap-0.5 text-primary" title="Victòries"><Trophy className="w-3.5 h-3.5" /> {f.stats?.wins ?? 0}</span>
+                            <span className="inline-flex items-center gap-0.5 text-destructive" title="Derrotes"><X className="w-3.5 h-3.5" /> {f.stats?.losses ?? 0}</span>
+                            <span className="inline-flex items-center gap-0.5 text-orange-500" title="Ratxa màx."><Flame className="w-3.5 h-3.5" /> {f.stats?.max_streak ?? 0}</span>
                           </div>
                         </div>
                       </Link>
