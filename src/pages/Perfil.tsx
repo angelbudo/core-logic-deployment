@@ -201,7 +201,7 @@ function PerfilInner() {
                   )}
                   {friends.accepted.map((f) => (
                     <div key={f.friendship.id} className="flex items-center justify-between rounded-md border border-primary/25 bg-background/40 p-2">
-                      <Link to={`/perfil/${f.other.user_id}`} className="flex items-center gap-3 min-w-0 flex-1 text-left hover:opacity-80 transition">
+                      <Link to={`/perfil/${f.other.user_id}`} className="flex items-center min-w-0 flex-1 text-left hover:opacity-80 transition -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
                         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${f.online ? "bg-gold" : "bg-muted-foreground/40"}`} title={f.online ? "Connectat" : "Desconnectat"} />
                         <div className="min-w-0">
                           <div className="font-medium truncate text-foreground">{f.other.username ?? "Jugador anònim"}</div>

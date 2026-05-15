@@ -35,7 +35,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
             to={`/perfil/${e.profile.user_id}`}
             className="w-full flex items-center justify-between gap-2 rounded-md border p-2 text-left hover:bg-background/60 transition"
           >
-            <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="flex items-center min-w-0 flex-1 -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
               <span className="w-7 text-center font-bold text-muted-foreground">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic text-muted-foreground"}`}>{label}</div>
