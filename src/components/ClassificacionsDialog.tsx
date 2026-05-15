@@ -27,7 +27,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
         const games = e.stats.wins + e.stats.losses;
         return (
           <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
-            <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="flex items-center min-w-0 flex-1 -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
               <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic"}`}>{label}</div>
