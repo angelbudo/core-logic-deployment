@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@/lib/router-shim";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Trophy, Star, Flame, WalletCards } from "lucide-react";
+import { Loader2, Trophy, Star, Flame, WalletCards, X } from "lucide-react";
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardKind } from "@/lib/leaderboards";
 
 function Loading() {
@@ -20,27 +20,36 @@ function Board({ kind }: { kind: LeaderboardKind }) {
   if (entries.length === 0) {
     return <p className="text-sm text-muted-foreground text-center py-6">Encara no hi ha jugadors classificats.</p>;
   }
-  const valueOf = (e: LeaderboardEntry) =>
-    kind === "wins" ? `${e.stats.wins} V`
-      : kind === "level" ? `Niv. ${e.stats.level}`
-      : kind === "games" ? `${e.stats.wins + e.stats.losses} P`
-      : `${e.stats.max_streak}🔥`;
   return (
     <div className="avatar-scroll max-h-[55vh] overflow-y-auto pr-2 space-y-1.5">
       {entries.map((e) => {
         const label = e.profile.username ?? "Jugador anònim";
+        const games = e.stats.wins + e.stats.losses;
         return (
-          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center justify-between rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
-            <div className="flex items-center gap-3 min-w-0">
+          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
               <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic"}`}>{label}</div>
-                <div className="text-xs text-neutral-800">
-                  Niv. {e.stats.level} · {e.stats.wins}V/{e.stats.losses}D · ratxa {e.stats.max_streak}
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs font-bold leading-none">
+                  <span className="inline-flex items-center gap-0.5 text-orange-500" title="Nivell">
+                    <Star className="w-3.5 h-3.5" /> {e.stats.level}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5" style={{ color: "#5b8a3c" }} title="Partides">
+                    <WalletCards className="w-3.5 h-3.5" /> {games}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-primary" title="Victòries">
+                    <Trophy className="w-3.5 h-3.5" /> {e.stats.wins}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-destructive" title="Derrotes">
+                    <X className="w-3.5 h-3.5" /> {e.stats.losses}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 text-orange-500" title="Ratxa màx.">
+                    <Flame className="w-3.5 h-3.5" /> {e.stats.max_streak}
+                  </span>
                 </div>
               </div>
             </div>
-            <div className="text-sm font-semibold tabular-nums">{valueOf(e)}</div>
           </Link>
         );
       })}
