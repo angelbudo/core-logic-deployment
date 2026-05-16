@@ -77,10 +77,10 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
         </DialogHeader>
         <Tabs defaultValue="level">
           <TabsList className="inline-flex w-auto h-auto gap-1">
-            <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent px-3 py-1.5 text-xs gap-1"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
-            <TabsTrigger value="games" className="data-[state=active]:bg-background px-3 py-1.5 text-xs gap-1" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
-            <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary px-3 py-1.5 text-xs gap-1"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
-            <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500 px-3 py-1.5 text-xs gap-1"><Flame className="w-3.5 h-3.5 shrink-0" />Ratxa</TabsTrigger>
+            <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
+            <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 -mx-[5px] px-[12px]" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
+            <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
+            <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500 py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Flame className="w-3.5 h-3.5 shrink-0" />Ratxa</TabsTrigger>
           </TabsList>
           <TabsContent value="level" className="mt-3"><Board kind="level" /></TabsContent>
           <TabsContent value="games" className="mt-3"><Board kind="games" /></TabsContent>
