@@ -32,8 +32,8 @@ function Board({ kind }: { kind: LeaderboardKind }) {
           streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
         }[kind];
         return (
-          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition -mx-[5px]">
-            <div className="flex items-center min-w-0 flex-1 -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
+          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition mx-[10px] -mr-[8px] -ml-[5px]">
+            <div className="flex items-center min-w-0 flex-1 -my-[5px] -mt-[10px] gap-[5px] mx-0 ml-0">
               <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic"}`}>{label}</div>
@@ -76,7 +76,7 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
           <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="level">
-          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[5px]">
+          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[3px]">
             <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 px-[6px] mx-0"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
             <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
             <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 px-[6px] mx-0"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
