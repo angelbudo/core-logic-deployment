@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode, type CSSProperties } from "react";
 import { Link } from "@/lib/router-shim";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Trophy, Star, Flame, WalletCards, X } from "lucide-react";
+import { Loader2, Trophy, Star, Flame, Gamepad2, X } from "lucide-react";
 import { fetchLeaderboard, type LeaderboardEntry, type LeaderboardKind } from "@/lib/leaderboards";
 
 function Loading() {
@@ -27,7 +27,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
         const games = e.stats.wins + e.stats.losses;
         const kindMeta = {
           level: { icon: <Star className="w-4 h-4" />, value: e.stats.level, className: "text-orange-500", style: undefined as CSSProperties | undefined },
-          games: { icon: <WalletCards className="w-4 h-4" />, value: games, className: "", style: { color: "#5b8a3c" } as CSSProperties },
+          games: { icon: <Gamepad2 className="w-4 h-4" />, value: games, className: "", style: { color: "#5b8a3c" } as CSSProperties },
           wins: { icon: <Trophy className="w-4 h-4" />, value: e.stats.wins, className: "text-primary", style: undefined },
           streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
         }[kind];
@@ -42,7 +42,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
                     <Star className="w-3.5 h-3.5" /> {e.stats.level}
                   </span>
                   <span className="inline-flex items-center gap-0.5" style={{ color: "#5b8a3c" }} title="Partides">
-                    <WalletCards className="w-3.5 h-3.5" /> {games}
+                    <Gamepad2 className="w-3.5 h-3.5" /> {games}
                   </span>
                   <span className="inline-flex items-center gap-0.5 text-primary" title="Victòries">
                     <Trophy className="w-3.5 h-3.5" /> {e.stats.wins}
@@ -78,7 +78,7 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
         <Tabs defaultValue="level">
           <TabsList className="inline-flex w-auto h-auto gap-1 mx-0 -mx-px -ml-px rounded-xl">
             <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 px-[6px] mx-0"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
-            <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
+            <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><Gamepad2 className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
             <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 px-[6px] mx-0"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
             <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500 py-1.5 text-xs gap-1 px-[6px] mx-0"><Flame className="w-3.5 h-3.5 shrink-0" />Ratxa</TabsTrigger>
           </TabsList>
