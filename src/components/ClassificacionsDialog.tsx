@@ -71,12 +71,12 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border-primary/30 px-[20px]">
+      <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border-primary/30">
         <DialogHeader>
           <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="level">
-          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[3px]">
+          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[3px] ml-0 -mr-[3px]">
             <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 px-[6px] mx-0"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
             <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
             <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 px-[6px] mx-0"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
