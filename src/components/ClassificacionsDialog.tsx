@@ -76,7 +76,7 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
           <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="level">
-          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[3px] ml-0 -mr-[3px] -ml-[2px] -ml-[2px] -mx-px">
+          <TabsList className="inline-flex w-auto h-auto gap-1 mx-0">
             <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 px-[6px] mx-0"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
             <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
             <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 px-[6px] mx-0"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
