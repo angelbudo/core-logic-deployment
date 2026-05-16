@@ -32,7 +32,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
           streak: { icon: <Flame className="w-4 h-4" />, value: e.stats.max_streak, className: "text-orange-500", style: undefined },
         }[kind];
         return (
-          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition">
+          <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 rounded-md border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition -mx-[5px]">
             <div className="flex items-center min-w-0 flex-1 -ml-[10px] -my-[5px] -mt-[10px] gap-[5px]">
               <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
               <div className="min-w-0">
@@ -76,11 +76,11 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
           <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="level">
-          <TabsList className="inline-flex w-auto h-auto gap-1">
-            <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
-            <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 -mx-[5px] px-[12px]" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
-            <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
-            <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500 py-1.5 text-xs gap-1 -mx-[5px] px-[12px]"><Flame className="w-3.5 h-3.5 shrink-0" />Ratxa</TabsTrigger>
+          <TabsList className="inline-flex w-auto h-auto gap-1 -mx-[5px]">
+            <TabsTrigger value="level" className="text-accent data-[state=active]:text-accent py-1.5 text-xs gap-1 px-[6px] mx-0"><Star className="w-3.5 h-3.5 shrink-0" />Nivell</TabsTrigger>
+            <TabsTrigger value="games" className="data-[state=active]:bg-background py-1.5 text-xs gap-1 px-[6px] mx-0" style={{ color: "#93C572" }}><WalletCards className="w-3.5 h-3.5 shrink-0" />Partides</TabsTrigger>
+            <TabsTrigger value="wins" className="text-primary data-[state=active]:text-primary py-1.5 text-xs gap-1 px-[6px] mx-0"><Trophy className="w-3.5 h-3.5 shrink-0" />Victòries</TabsTrigger>
+            <TabsTrigger value="streak" className="text-orange-500 data-[state=active]:text-orange-500 py-1.5 text-xs gap-1 px-[6px] mx-0"><Flame className="w-3.5 h-3.5 shrink-0" />Ratxa</TabsTrigger>
           </TabsList>
           <TabsContent value="level" className="mt-3"><Board kind="level" /></TabsContent>
           <TabsContent value="games" className="mt-3"><Board kind="games" /></TabsContent>
