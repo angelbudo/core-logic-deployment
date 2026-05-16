@@ -479,7 +479,7 @@ function Lobby() {
                     className="inline-flex items-center justify-center h-7 w-9 rounded-sm text-primary hover:opacity-80 focus:outline-none p-0"
                     aria-label="Tancar"
                   >
-                    <X className="h-7 w-7" />
+                    <X className="h-7 w-7 -mr-[15px]" />
                   </SheetClose>
                 }
               />

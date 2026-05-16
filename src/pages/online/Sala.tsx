@@ -460,7 +460,7 @@ function InviteList({
                     className="inline-flex items-center justify-center h-7 w-9 rounded-sm text-primary hover:opacity-80 focus:outline-none p-0 shrink-0"
                     aria-label={t("common.close")}
                   >
-                    <X className="h-7 w-7" />
+                    <X className="h-7 w-7 -mr-[15px]" />
                   </button>
                 </div>
                 <div className="px-2 py-1.5 flex-1 min-h-0 overflow-y-auto chat-scroll text-xs space-y-0.5">
