@@ -71,7 +71,7 @@ export function ClassificacionsDialog({ trigger }: { trigger: ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border-primary/30">
+      <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border-primary/30 px-[20px]">
         <DialogHeader>
           <DialogTitle className="text-gold font-title font-black italic">Classificacions</DialogTitle>
         </DialogHeader>
