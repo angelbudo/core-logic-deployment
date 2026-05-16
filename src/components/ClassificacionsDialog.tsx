@@ -33,7 +33,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
         }[kind];
         return (
           <Link key={e.profile.user_id} to={`/perfil/${e.profile.user_id}`} className="flex items-center gap-2 border border-primary/25 p-2 text-neutral-900 bg-stone-200 hover:bg-stone-300 transition mx-0 rounded-xl ml-0 -mr-[6px]">
-            <div className="flex items-center min-w-0 flex-1 -my-[5px] -mt-[10px] gap-[5px] mx-0 ml-0">
+            <div className="flex items-center min-w-0 flex-1 -my-[5px] -mt-[10px] gap-[5px] mx-0 -ml-[5px]">
               <span className="w-7 text-center font-bold text-neutral-900">{e.rank}</span>
               <div className="min-w-0">
                 <div className={`font-medium truncate ${e.profile.username ? "" : "italic"}`}>{label}</div>
@@ -56,7 +56,7 @@ function Board({ kind }: { kind: LeaderboardKind }) {
                 </div>
               </div>
             </div>
-            <span className={`inline-flex items-center gap-1 font-bold text-sm shrink-0 ${kindMeta.className}`} style={kindMeta.style}>
+            <span className={`inline-flex items-center gap-1 font-bold text-sm shrink-0 ${kindMeta.className} mr-[5px]`} style={kindMeta.style}>
               {kindMeta.icon} {kindMeta.value}
             </span>
           </Link>
